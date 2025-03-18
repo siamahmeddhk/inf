@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repeat Sentence App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-96 relative">
+    <!-- Description Button (Top Right) -->
+    <button
+      onclick="openModal()"
+      class="absolute top-4 right-4 text-gray-500 hover:text-blue-600 transition"
+      title="What is this?"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </button>
+
+    <h1 class="text-2xl font-bold mb-6 text-center text-blue-600">Repeat Sentence</h1>
+
+    <div class="space-y-4">
+      <!-- Sentence Input -->
+      <div>
+        <input
+          type="text"
+          id="sentenceInput"
+          placeholder=""
+          class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Repeat Count Input -->
+      <div>
+        <input
+          type="number"
+          id="repeatCount"
+          placeholder=""
+          class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Repeat Button -->
+      <button
+        onclick="repeatSentence()"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition transform hover:scale-105"
+      >
+        Repeat Sentence
+      </button>
+    </div>
+
+    <!-- Output Section -->
+    <div class="mt-6">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-gray-700 font-medium">Output:</span>
+        <!-- Copy Button with Text -->
+        <button
+          onclick="copyOutput()"
+          class="bg-green-500 text-white px-4 py-1 rounded-lg hover:bg-green-600 transition"
+        >
+          Copy
+        </button>
+      </div>
+      <!-- Output Box -->
+      <div
+        id="output"
+        class="p-3 border border-gray-300 rounded-lg bg-gray-50 overflow-y-auto max-h-32 text-gray-700"
+      ></div>
+    </div>
+  </div>
+
+  <!-- Modal for Description -->
+  <div id="modal" class="fixed bg-black bg-opacity-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-lg p-6 w-96">
+      <h2 class="text-xl font-bold mb-4 text-blue-600">What is this? 🤔</h2>
+      <p class="text-sm text-gray-600 mb-4">
+        Someone owes you money but keeps avoiding you? 😤 Write a sentence like <strong>"When will you return my money?"</strong>, repeat it 10,000 times, and send it to them. Let them feel the pressure! 💸😂
+      </p>
+      <button
+        onclick="closeModal()"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Function to repeat the sentence
+    function repeatSentence() {
+      const sentence = document.getElementById('sentenceInput').value;
+      const count = parseInt(document.getElementById('repeatCount').value);
+
+      if (!sentence || isNaN(count) || count <= 0) {
+        alert("Please enter a valid sentence and a positive number.");
+        return;
+      }
+
+      const repeatedSentence = (sentence + ' ').repeat(count).trim();
+      document.getElementById('output').innerText = repeatedSentence;
+    }
+
+    // Function to copy the output
+    function copyOutput() {
+      const outputText = document.getElementById('output').innerText;
+      navigator.clipboard.writeText(outputText)
+        .then(() => {
+          alert("Copied to clipboard! Now go spam them! 😂");
+        })
+        .catch(() => {
+          alert("Failed to copy. Please try again.");
+        });
+    }
+
+    // Function to open the modal
+    function openModal() {
+      document.getElementById('modal').classList.remove('hidden');
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
