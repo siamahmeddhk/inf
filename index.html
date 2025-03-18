@@ -27,7 +27,7 @@
         <input
           type="text"
           id="sentenceInput"
-          placeholder=""
+          placeholder="Input your word or sentence"
           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
@@ -37,7 +37,7 @@
         <input
           type="number"
           id="repeatCount"
-          placeholder=""
+          placeholder="How many times you want to print?"
           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
@@ -55,7 +55,7 @@
     <div class="mt-6">
       <div class="flex justify-between items-center mb-2">
         <span class="text-gray-700 font-medium">Output:</span>
-        <!-- Copy Button with Text -->
+        <!-- Copy Button -->
         <button
           onclick="copyOutput()"
           class="bg-green-500 text-white px-4 py-1 rounded-lg hover:bg-green-600 transition"
@@ -95,6 +95,11 @@
 
       if (!sentence || isNaN(count) || count <= 0) {
         alert("Please enter a valid sentence and a positive number.");
+        return;
+      }
+
+      if (count > 1000) {
+        alert("⚠️ Warning: Please do not enter a value greater than 1000 ❌, as it may cause performance issues 🖥️⚡ or harm your device 🔥.\n\nThank you for your understanding! 😊✨");
         return;
       }
 
